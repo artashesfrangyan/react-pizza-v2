@@ -15,6 +15,7 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
         <ul>
           {types.map((type) => (
             <li
+              key={type}
               onClick={() => setActiveThickness(type)}
               className={activeThickness === type ? 'active' : ''}>
               {thicknesses[type]}
@@ -23,7 +24,10 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
         </ul>
         <ul>
           {sizes.map((size, i) => (
-            <li onClick={() => setActiveSize(i)} className={activeSize === i ? 'active' : ''}>
+            <li
+              key={i}
+              onClick={() => setActiveSize(i)}
+              className={activeSize === i ? 'active' : ''}>
               {size} см.
             </li>
           ))}
