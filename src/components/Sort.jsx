@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Sort = ({ value, handleSort }) => {
+const Sort = ({value, handleSort}) => {
   const [open, setOpen] = React.useState(false);
-  const options = [
+  const options = [ 
     { name: 'популярности', parameter: 'rating' },
     { name: 'цене', parameter: 'price' },
     { name: 'алфавиту', parameter: 'title' },

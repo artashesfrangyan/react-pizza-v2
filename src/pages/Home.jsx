@@ -1,20 +1,26 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Sort from '../components/Sort';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
+import { setCategoryId, setSortOption } from '../redux/slices/filterSlice'; 
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const sortOption = useSelector((state => state.filterSlice.sortOption))
+  const categoryId = useSelector(state => state.filterSlice.categoryId);
+
   const { searchValue } = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [categoryId, setCategoryId] = React.useState(0);
-  const [sortOption, setSortOption] = React.useState({ name: 'популярности', parameter: 'rating' });
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const url = new URL('https://64283422161067a83b092b04.mockapi.io/items?limit=4');
+  
   categoryId && url.searchParams.append('category', categoryId);
   sortOption && url.searchParams.append('sortBy', sortOption.parameter);
   searchValue && url.searchParams.append('title', searchValue);
@@ -34,8 +40,8 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} handleCategory={(id) => setCategoryId(id)} />
-        <Sort value={sortOption} handleSort={(id) => setSortOption(id)} />
+        <Categories value={categoryId} handleCategory={(id) => dispatch(setCategoryId(id))} />
+        <Sort value={sortOption} handleSort={(id) => dispatch(setSortOption(id))} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
