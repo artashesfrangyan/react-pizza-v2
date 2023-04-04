@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
@@ -7,12 +8,11 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Sort from '../components/Sort';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
-import { setCategoryId, setSortOption } from '../redux/slices/filterSlice'; 
+import { setCategoryId, setSortOption } from '../redux/slices/filterSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const sortOption = useSelector((state => state.filterSlice.sortOption))
-  const categoryId = useSelector(state => state.filterSlice.categoryId);
+  const { sortOption, categoryId } = useSelector((state) => state.filterSlice);
 
   const { searchValue } = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
@@ -20,7 +20,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const url = new URL('https://64283422161067a83b092b04.mockapi.io/items?limit=4');
-  
+
   categoryId && url.searchParams.append('category', categoryId);
   sortOption && url.searchParams.append('sortBy', sortOption.parameter);
   searchValue && url.searchParams.append('title', searchValue);
@@ -28,12 +28,10 @@ const Home = () => {
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) => {
-        setItems(json);
-        setIsLoading(false);
-      });
+    axios.get(url).then(({ data }) => {
+      setItems(data);
+      setIsLoading();
+    });
     window.scrollTo(0, 0);
   }, [categoryId, sortOption, searchValue, currentPage]);
 
