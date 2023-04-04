@@ -8,16 +8,15 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Sort from '../components/Sort';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
-import { setCategoryId, setSortOption } from '../redux/slices/filterSlice';
+import { setCategoryId, setSortOption, setCurrentPage } from '../redux/slices/filterSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { sortOption, categoryId } = useSelector((state) => state.filterSlice);
+  const { sortOption, categoryId, currentPage } = useSelector((state) => state.filterSlice);
 
   const { searchValue } = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [currentPage, setCurrentPage] = React.useState(1);
 
   const url = new URL('https://64283422161067a83b092b04.mockapi.io/items?limit=4');
 
@@ -48,7 +47,7 @@ const Home = () => {
           : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
       </div>
       <div id="container">
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <Pagination setCurrentPage={(id) => dispatch(setCurrentPage(id))} />
       </div>
     </div>
   );
