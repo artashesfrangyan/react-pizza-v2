@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Sort = ({value, handleSort}) => {
+export const options = [
+  { name: 'популярности', parameter: 'rating' },
+  { name: 'цене', parameter: 'price' },
+  { name: 'алфавиту', parameter: 'title' },
+];
+
+const Sort = ({ value, handleSort }) => {
   const [open, setOpen] = React.useState(false);
-  const options = [ 
-    { name: 'популярности', parameter: 'rating' },
-    { name: 'цене', parameter: 'price' },
-    { name: 'алфавиту', parameter: 'title' },
-  ];
 
   return (
     <div className="sort">
