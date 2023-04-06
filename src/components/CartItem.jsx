@@ -18,7 +18,7 @@ const CartItem = (values) => {
       dispatch(removeItem(id));
     }
   };
-
+  console.log(values);
   return (
     <div className="cart__item">
       <div className="cart__item-img">
@@ -30,7 +30,9 @@ const CartItem = (values) => {
       </div>
       <div className="cart__item-count">
         <div
-          onClick={() => (values.id > 0 ? onClickMinus(values.id) : dispatch(removeItem(values)))}
+          onClick={() => {
+            values.count > 1 ? onClickMinus(values.id) : dispatch(removeItem(values.id));
+          }}
           className="button button--outline button--circle cart__item-count-minus">
           <svg
             width="10"
