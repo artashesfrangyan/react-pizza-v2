@@ -26,7 +26,9 @@ const CartItem = (values) => {
       </div>
       <div className="cart__item-info">
         <h3>{values.title}</h3>
-        <p>{values.type} тесто, 26 см.</p>
+        <p>
+          {values.type} тесто, {values.size} см.
+        </p>
       </div>
       <div className="cart__item-count">
         <div
