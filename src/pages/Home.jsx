@@ -8,7 +8,6 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Sort, { options } from '../components/Sort';
 import Pagination from '../components/Pagination';
-import { SearchContext } from '../App';
 import {
   setCategoryId,
   setSortOption,
@@ -24,9 +23,8 @@ const Home = () => {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { sortOption, categoryId, currentPage } = useSelector(selectFilter);
+  const { sortOption, categoryId, currentPage, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
-  const { searchValue } = React.useContext(SearchContext);
 
   const getPizzas = async () => {
     const url = new URL('https://64283422161067a83b092b04.mockapi.io/items?limit=4');
