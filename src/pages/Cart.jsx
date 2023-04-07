@@ -7,8 +7,7 @@ import CartEmpty from '../components/CartEmpty';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const totalCount = useSelector((state) => state.cartSlice.totalCount);
-  const { totalPrice, items } = useSelector((state) => state.cartSlice);
+  const { totalPrice, items, totalCount } = useSelector((state) => state.cart);
 
   const onClickClear = () => {
     if (window.confirm('Удалить все товары из корзины?')) {

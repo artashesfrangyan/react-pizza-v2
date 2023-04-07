@@ -18,7 +18,7 @@ const CartItem = (values) => {
       dispatch(removeItem(id));
     }
   };
-  console.log(values);
+
   return (
     <div className="cart__item">
       <div className="cart__item-img">
