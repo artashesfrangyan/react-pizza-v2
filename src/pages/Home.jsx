@@ -14,8 +14,9 @@ import {
   setSortOption,
   setCurrentPage,
   setFilters,
+  selectFilter,
 } from '../redux/slices/filterSlice';
-import { fetchItems } from '../redux/slices/pizzaSlice';
+import { fetchItems, selectPizza } from '../redux/slices/pizzaSlice';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -23,8 +24,8 @@ const Home = () => {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { sortOption, categoryId, currentPage } = useSelector((state) => state.filters);
-  const { items, status } = useSelector((state) => state.pizza);
+  const { sortOption, categoryId, currentPage } = useSelector(selectFilter);
+  const { items, status } = useSelector(selectPizza);
   const { searchValue } = React.useContext(SearchContext);
 
   const getPizzas = async () => {
