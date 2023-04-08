@@ -41,15 +41,21 @@ const FullPizza = () => {
   }, []);
 
   if (!item) {
-    return 'Загрузка...';
+    return (
+      <div
+        style={{
+          height: '400px',
+        }}>
+        <h1 style={{ textAlign: 'center', lineHeight: '400px' }}>Пицца загружается...</h1>
+      </div>
+    );
   }
 
   return (
     <div className="container" style={{ display: 'flex', justifyContent: 'space-around' }}>
       <img src={item.imageUrl} alt="" />
       <div>
-        <h2>{item.title}</h2>
-        <h4>{item.price} ₽</h4>
+        <h1 style={{ marginBottom: '20px' }}>{item.title}</h1>
         <div className="pizza-block__selector">
           <ul>
             {item.types.map((type) => (
@@ -73,7 +79,9 @@ const FullPizza = () => {
           </ul>
         </div>
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price">от {item.price} ₽</div>
+          <div style={{ fontSize: '30px' }} className="pizza-block__price">
+            {item.price} ₽
+          </div>
           <button onClick={() => onClickAdd()} className="button button--outline button--add">
             <svg
               width="12"
