@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { addItem, selectCartItemById } from '../redux/slices/cartSlice';
 
 const FullPizza = () => {
@@ -12,6 +12,7 @@ const FullPizza = () => {
   const thicknesses = ['тонкое', 'традиционное'];
   const addedCount = cartItem ? cartItem.count : 0;
 
+  const navigate = useNavigate();
   const [activeThickness, setActiveThickness] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
 
@@ -33,7 +34,8 @@ const FullPizza = () => {
         const { data } = await axios.get(`https://64283422161067a83b092b04.mockapi.io/items/${id}`);
         setItem(data);
       } catch (error) {
-        console.log('Ошибка при получении пиццы');
+        alert('Ошибка при получении пиццы. Возвращаем вас на главную страницу');
+        navigate('/');
       }
     }
 
