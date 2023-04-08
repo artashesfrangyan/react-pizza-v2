@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound.jsx';
 import Cart from './pages/Cart.jsx';
 
 import './scss/app.scss';
+import FullPizza from './pages/FullPizza';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="*" element={<NotFound />}></Route>
+          <Route path="/pizza/:id" element={<FullPizza />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
         </Routes>
       </div>
