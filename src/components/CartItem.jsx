@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
+import { Link } from 'react-router-dom';
 
 const CartItem = (values) => {
   const dispatch = useDispatch();
@@ -21,15 +22,17 @@ const CartItem = (values) => {
 
   return (
     <div className="cart__item">
-      <div className="cart__item-img">
-        <img className="pizza-block__image" src={values.imageUrl} alt="Pizza" />
-      </div>
-      <div className="cart__item-info">
-        <h3>{values.title}</h3>
-        <p>
-          {values.type} тесто, {values.size} см.
-        </p>
-      </div>
+      <Link style={{ display: 'contents' }} to={`/pizza/${values.id}`}>
+        <div className="cart__item-img">
+          <img className="pizza-block__image" src={values.imageUrl} alt="Pizza" />
+        </div>
+        <div className="cart__item-info">
+          <h3>{values.title}</h3>
+          <p>
+            {values.type} тесто, {values.size} см.
+          </p>
+        </div>
+      </Link>
       <div className="cart__item-count">
         <div
           onClick={() => {
