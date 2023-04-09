@@ -6,15 +6,16 @@ export const options = [
   { name: 'алфавиту', parameter: 'title' },
 ];
 
-type SortProps = { value: { name: string; parameter: string }; handleSort: any };
+type SortProps = { value: { name: string; parameter: string }; handleSort: ({}) => void };
+type MouseProps = { composedPath: () => { includes: (arg: HTMLElement) => boolean } };
 
 const Sort: React.FC<SortProps> = ({ value, handleSort }) => {
   const [open, setOpen] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    function handleClickOutside(event: any) {
-      if (!event.composedPath().includes(sortRef.current)) {
+    function handleClickOutside(event: MouseProps) {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setOpen(false);
       }
     }

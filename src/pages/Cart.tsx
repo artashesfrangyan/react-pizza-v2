@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
 import CartEmpty from '../components/CartEmpty';
 import { clearItems, selectCart } from '../redux/slices/cartSlice';
+import { ItemProps } from '../types/ItemProps';
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { totalPrice, items, totalCount } = useSelector(selectCart);
-
+  console.log(items);
   const onClickClear = () => {
     if (window.confirm('Удалить все товары из корзины?')) {
       dispatch(clearItems());
@@ -88,7 +89,7 @@ const Cart: React.FC = () => {
           </div>
         </div>
         <div className="content__items">
-          {items.map((item) => (
+          {items.map((item: ItemProps) => (
             <CartItem key={item.id} {...item} />
           ))}
         </div>

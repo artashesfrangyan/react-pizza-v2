@@ -2,20 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
+import { ItemProps } from '../types/ItemProps';
 
-type CartItemProps = {
-  id: string;
-  imageUrl: string;
-  title: string;
-  type: number;
-  size: number;
-  count: number;
-  price: number;
-};
-
-const CartItem: React.FC<CartItemProps> = (values) => {
+const CartItem: React.FC<ItemProps> = (values) => {
   const dispatch = useDispatch();
-
+  console.log(values);
   const onClickPlus = (id: string) => {
     dispatch(addItem({ id }));
   };
@@ -46,7 +37,9 @@ const CartItem: React.FC<CartItemProps> = (values) => {
       <div className="cart__item-count">
         <div
           onClick={() => {
-            values.count > 1 ? onClickMinus(values.id) : dispatch(removeItem(values.id));
+            values.count && values.count > 1
+              ? onClickMinus(values.id)
+              : dispatch(removeItem(values.id));
           }}
           className="button button--outline button--circle cart__item-count-minus">
           <svg
@@ -83,7 +76,7 @@ const CartItem: React.FC<CartItemProps> = (values) => {
         </div>
       </div>
       <div className="cart__item-price">
-        <b>{values.price * values.count} ₽</b>
+        <b>{values.count && values.price * values.count} ₽</b>
       </div>
       <div onClick={() => onClickRemove(values.id)} className="cart__item-remove">
         <div className="button button--outline button--circle">

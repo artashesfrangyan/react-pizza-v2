@@ -2,7 +2,7 @@ import React from 'react';
 
 type CategoriesProps = {
   value: number;
-  handleCategory: any;
+  handleCategory: (i: number) => void;
 };
 
 const Categories: React.FC<CategoriesProps> = ({ value, handleCategory }) => {
