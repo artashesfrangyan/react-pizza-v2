@@ -17,6 +17,15 @@ import {
 } from '../redux/slices/filterSlice';
 import { fetchItems, selectPizzaData } from '../redux/slices/pizzaSlice';
 
+type ItemProps = {
+  id: number;
+  title: item.title;
+  price: item.price;
+  imageUrl: item.imageUrl;
+  type: thicknesses[activeThickness];
+  size: item.sizes[activeSize];
+};
+
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -75,8 +84,11 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} handleCategory={(id) => dispatch(setCategoryId(id))} />
-        <Sort value={sortOption} handleSort={(id) => dispatch(setSortOption(id))} />
+        <Categories
+          value={categoryId}
+          handleCategory={(id: number) => dispatch(setCategoryId(id))}
+        />
+        <Sort value={sortOption} handleSort={(id: number) => dispatch(setSortOption(id))} />
       </div>
 
       {status === 'error' ? (
@@ -93,7 +105,7 @@ const Home = () => {
               : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
           </div>
           <div id="container">
-            <Pagination setCurrentPage={(id) => dispatch(setCurrentPage(id))} />
+            <Pagination setCurrentPage={(id: number) => dispatch(setCurrentPage(id))} />
           </div>
         </>
       )}

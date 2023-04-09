@@ -6,11 +6,12 @@ import { addItem, selectCartItemById } from '../redux/slices/cartSlice';
 
 const FullPizza: React.FC = () => {
   const { id } = useParams();
-  const [item, setItem]: any = React.useState<{
+  const [item, setItem] = React.useState<{
     imageUrl: string;
     title: string;
     price: number;
-    sizes: [];
+    sizes: number[];
+    types: number[];
   }>();
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
@@ -24,11 +25,11 @@ const FullPizza: React.FC = () => {
   const onClickAdd = () => {
     const chosenItem = {
       id,
-      title: item.title,
-      price: item.price,
-      imageUrl: item.imageUrl,
+      title: item?.title,
+      price: item?.price,
+      imageUrl: item?.imageUrl,
       type: thicknesses[activeThickness],
-      size: item.sizes[activeSize],
+      size: item?.sizes[activeSize],
     };
     dispatch(addItem(chosenItem));
   };
