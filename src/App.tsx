@@ -2,8 +2,8 @@ import React from 'react';
 
 import Home from './pages/Home';
 import { Routes, Route } from 'react-router-dom';
-import NotFound from './pages/NotFound.jsx';
-import Cart from './pages/Cart.jsx';
+import NotFound from './pages/NotFound';
+import Cart from './pages/Cart';
 
 import './scss/app.scss';
 import FullPizza from './pages/FullPizza';
