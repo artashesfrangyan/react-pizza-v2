@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { addItem, selectCartItemById } from '../redux/slices/cartSlice';
 
 const FullPizza: React.FC = () => {
-  const { id } = useParams();
+  const { id }: any = useParams();
   const [item, setItem] = React.useState<{
     imageUrl: string;
     title: string;
@@ -14,7 +14,7 @@ const FullPizza: React.FC = () => {
     types: number[];
   }>();
   const dispatch = useDispatch();
-  const cartItem = useSelector(selectCartItemById(id));
+  const cartItem: any = useSelector(selectCartItemById(id));
   const thicknesses = ['тонкое', 'традиционное'];
   const addedCount = cartItem ? cartItem.count : 0;
 

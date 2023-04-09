@@ -29,10 +29,10 @@ const Home = () => {
 
   const getPizzas = async () => {
     const url = new URL('https://64283422161067a83b092b04.mockapi.io/items?limit=4');
-    categoryId && url.searchParams.append('category', categoryId);
+    categoryId && url.searchParams.append('category', categoryId.toString());
     sortOption && url.searchParams.append('sortBy', sortOption.parameter);
     searchValue && url.searchParams.append('title', searchValue);
-    currentPage && url.searchParams.append('page', currentPage);
+    currentPage && url.searchParams.append('page', currentPage.toString());
 
     dispatch(fetchItems(url));
   };

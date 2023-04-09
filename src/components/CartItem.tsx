@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
-import { ItemProps } from '../types/ItemProps';
+import { CartItemProps } from '../types/CartItemProps';
 
-const CartItem: React.FC<ItemProps> = (values) => {
+const CartItem: React.FC<CartItemProps> = (values) => {
   const dispatch = useDispatch();
   console.log(values);
   const onClickPlus = (id: string) => {
