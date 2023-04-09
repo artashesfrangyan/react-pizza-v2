@@ -1,8 +1,13 @@
 import React from 'react';
 
-const Categories = ({ value, handleCategory }) => {
+type CategoriesProps = {
+  value: number;
+  handleCategory: any;
+};
+
+const Categories: React.FC<CategoriesProps> = ({ value, handleCategory }) => {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
-  
+
   return (
     <div className="categories">
       <ul>

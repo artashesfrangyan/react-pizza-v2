@@ -3,18 +3,28 @@ import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
 
-const CartItem = (values) => {
+type CartItemProps = {
+  id: string;
+  imageUrl: string;
+  title: string;
+  type: number;
+  size: number;
+  count: number;
+  price: number;
+};
+
+const CartItem: React.FC<CartItemProps> = (values) => {
   const dispatch = useDispatch();
 
-  const onClickPlus = (id) => {
+  const onClickPlus = (id: string) => {
     dispatch(addItem({ id }));
   };
 
-  const onClickMinus = (id) => {
+  const onClickMinus = (id: string) => {
     dispatch(minusItem(id));
   };
 
-  const onClickRemove = (id) => {
+  const onClickRemove = (id: string) => {
     if (window.confirm('Удалить товар из корзины?')) {
       dispatch(removeItem(id));
     }

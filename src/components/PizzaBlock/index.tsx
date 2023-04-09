@@ -3,14 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem, selectCartItemById } from '../../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
 
-const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
+type PizzaItem = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: [];
+};
+
+const PizzaBlock: React.FC<PizzaItem> = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const thicknesses = ['тонкое', 'традиционное'];
   const addedCount = cartItem ? cartItem.count : 0;
 
-  const [activeThickness, setActiveThickness] = React.useState(0);
-  const [activeSize, setActiveSize] = React.useState(0);
+  const [activeThickness, setActiveThickness] = React.useState<number>(0);
+  const [activeSize, setActiveSize] = React.useState<number>(0);
 
   const onClickAdd = () => {
     const item = {

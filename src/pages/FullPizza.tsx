@@ -4,9 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addItem, selectCartItemById } from '../redux/slices/cartSlice';
 
-const FullPizza = () => {
+const FullPizza: React.FC = () => {
   const { id } = useParams();
-  const [item, setItem] = React.useState();
+  const [item, setItem]: any = React.useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+    sizes: [];
+  }>();
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const thicknesses = ['тонкое', 'традиционное'];
@@ -60,7 +65,7 @@ const FullPizza = () => {
         <h1 style={{ marginBottom: '20px' }}>{item.title}</h1>
         <div className="pizza-block__selector">
           <ul>
-            {item.types.map((type) => (
+            {item.types.map((type: number) => (
               <li
                 key={type}
                 onClick={() => setActiveThickness(type)}
@@ -70,7 +75,7 @@ const FullPizza = () => {
             ))}
           </ul>
           <ul>
-            {item.sizes.map((size, i) => (
+            {item.sizes.map((size: number, i: number) => (
               <li
                 key={i}
                 onClick={() => setActiveSize(i)}

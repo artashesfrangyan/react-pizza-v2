@@ -6,21 +6,23 @@ export const options = [
   { name: 'алфавиту', parameter: 'title' },
 ];
 
-const Sort = ({ value, handleSort }) => {
+type SortProps = { value: { name: string; parameter: string }; handleSort: any };
+
+const Sort: React.FC<SortProps> = ({ value, handleSort }) => {
   const [open, setOpen] = React.useState(false);
-  const sortRef = React.useRef();
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: any) {
       if (!event.composedPath().includes(sortRef.current)) {
         setOpen(false);
       }
     }
     document.body.addEventListener('click', handleClickOutside);
 
-    return () =>  {
+    return () => {
       document.body.removeEventListener('click', handleClickOutside);
-    }
+    };
   }, []);
 
   return (
