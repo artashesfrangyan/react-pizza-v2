@@ -1,4 +1,5 @@
 import React from 'react';
+import { SortProps } from '../types/SortProps';
 
 export const options = [
   { name: 'популярности', parameter: 'rating' },
@@ -6,10 +7,9 @@ export const options = [
   { name: 'алфавиту', parameter: 'title' },
 ];
 
-type SortProps = { value: { name: string; parameter: string }; handleSort: ({}) => void };
 type MouseProps = { composedPath: () => { includes: (arg: HTMLElement) => boolean } };
 
-const Sort: React.FC<SortProps> = ({ value, handleSort }) => {
+const Sort: React.FC<{ value: SortProps; handleSort: () => void }> = ({ value, handleSort }) => {
   const [open, setOpen] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
@@ -49,7 +49,7 @@ const Sort: React.FC<SortProps> = ({ value, handleSort }) => {
             {options.map((option, i) => (
               <li
                 onClick={() => {
-                  handleSort(option);
+                  handleSort();
                   setOpen(false);
                 }}
                 key={i}

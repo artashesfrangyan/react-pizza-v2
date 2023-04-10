@@ -6,7 +6,7 @@ import { CartItemProps } from '../types/CartItemProps';
 
 const CartItem: React.FC<CartItemProps> = (values) => {
   const dispatch = useDispatch();
-  console.log(values);
+
   const onClickPlus = (id: string) => {
     dispatch(addItem({ id }));
   };

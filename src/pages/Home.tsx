@@ -28,19 +28,19 @@ const Home = () => {
   const { items, status } = useSelector(selectPizzaData);
 
   const getPizzas = async () => {
-    const url = new URL('https://64283422161067a83b092b04.mockapi.io/items?limit=4');
+    let url = new URL('https://64283422161067a83b092b04.mockapi.io/items?limit=4');
     categoryId && url.searchParams.append('category', categoryId.toString());
     sortOption && url.searchParams.append('sortBy', sortOption.parameter);
     searchValue && url.searchParams.append('title', searchValue);
     currentPage && url.searchParams.append('page', currentPage.toString());
 
-    dispatch(fetchItems(url));
+    dispatch(fetchItems(url.href));
   };
 
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      const sort = options.find((obj) => obj.sortProperty === params.sortProperty);
+      const sort = options.find((obj) => obj.parameter === params.parameter);
 
       dispatch(
         setFilters({

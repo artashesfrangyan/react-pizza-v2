@@ -1,13 +1,23 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '../store';
+import { CartItemProps } from '../../types/CartItemProps';
+import { ItemProps } from '../../types/ItemProps';
 
-export const fetchItems = createAsyncThunk('pizza/fetchByIdStatus', async (url: string) => {
-  const { data } = await axios.get(url);
-  return data;
-});
+export const fetchItems = createAsyncThunk<ItemProps[], string>(
+  'pizza/fetchByIdStatus',
+  async (url) => {
+    const { data } = await axios.get(url);
+    return data;
+  },
+);
 
-const initialState = {
+interface PizzaSliceState {
+  items: CartItemProps[];
+  status: 'loading' | 'success' | 'error';
+}
+
+const initialState: PizzaSliceState = {
   items: [],
   status: 'loading', // loading || success || error
 };
@@ -26,7 +36,7 @@ export const pizzaSlice = createSlice({
         state.status = 'loading';
         state.items = [];
       })
-      .addCase(fetchItems.fulfilled, (state, action) => {
+      .addCase(fetchItems.fulfilled, (state, action: PayloadAction<any>) => {
         state.items = action.payload;
         state.status = 'success';
       })

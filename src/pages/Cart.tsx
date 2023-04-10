@@ -9,7 +9,7 @@ import { CartItemProps } from '../types/CartItemProps';
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { totalPrice, items, totalCount } = useSelector(selectCart);
-  console.log(items);
+
   const onClickClear = () => {
     if (window.confirm('Удалить все товары из корзины?')) {
       dispatch(clearItems());
