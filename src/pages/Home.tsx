@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,11 +16,11 @@ import {
   selectFilter,
 } from '../redux/slices/filterSlice';
 import { fetchItems, selectPizzaData } from '../redux/slices/pizzaSlice';
-import type { ItemProps } from '../types/ItemProps';
+import { useAppDispatch } from '../redux/store';
 
 const Home = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
@@ -39,13 +39,13 @@ const Home = () => {
 
   React.useEffect(() => {
     if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      const sort = options.find((obj) => obj.parameter === params.parameter);
+      const params: any = qs.parse(window.location.search.substring(1));
+      const sortOption = options.find((obj) => obj.parameter === params.parameter);
 
       dispatch(
         setFilters({
           ...params,
-          sort,
+          sortOption,
         }),
       );
       isSearch.current = true;
@@ -76,11 +76,13 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          value={categoryId}
-          handleCategory={(id: number) => dispatch(setCategoryId(id))}
+        <Categories value={categoryId} handleCategory={(id) => dispatch(setCategoryId(id))} />
+        <Sort
+          value={sortOption}
+          handleSort={(option) => {
+            dispatch(setSortOption(option));
+          }}
         />
-        <Sort value={sortOption} handleSort={(id: number) => dispatch(setSortOption(id))} />
       </div>
 
       {status === 'error' ? (
@@ -94,7 +96,7 @@ const Home = () => {
           <div className="content__items">
             {status === 'loading'
               ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
-              : items.map((item: ItemProps) => <PizzaBlock key={item.id} {...item} />)}
+              : items.map((item) => <PizzaBlock types={[]} sizes={[]} key={item.id} {...item} />)}
           </div>
           <div id="container">
             <Pagination setCurrentPage={(id: number) => dispatch(setCurrentPage(id))} />

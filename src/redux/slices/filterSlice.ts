@@ -35,7 +35,7 @@ export const filterSlice = createSlice({
     setFilters(state, action: PayloadAction<FilterSliceState>) {
       state.currentPage = Number(action.payload.currentPage);
       state.categoryId = Number(action.payload.categoryId);
-      action.payload.sortOption && (state.sortOption = action.payload.sortOption);
+      state.sortOption = action.payload.sortOption;
     },
   },
 });

@@ -9,7 +9,10 @@ export const options = [
 
 type MouseProps = { composedPath: () => { includes: (arg: HTMLElement) => boolean } };
 
-const Sort: React.FC<{ value: SortProps; handleSort: () => void }> = ({ value, handleSort }) => {
+const Sort: React.FC<{ value: SortProps; handleSort: (value: SortProps) => void }> = ({
+  value,
+  handleSort,
+}) => {
   const [open, setOpen] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
@@ -49,7 +52,7 @@ const Sort: React.FC<{ value: SortProps; handleSort: () => void }> = ({ value, h
             {options.map((option, i) => (
               <li
                 onClick={() => {
-                  handleSort();
+                  handleSort(option);
                   setOpen(false);
                 }}
                 key={i}
