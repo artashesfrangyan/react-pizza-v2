@@ -217,6 +217,18 @@ body {
       align-items: center;
       justify-content: space-between;
       width: 13%;
+      &--disabled {
+        opacity: 0.3;
+        &:active {
+          transform: none;
+        }
+        &:hover {
+          background-color: transparent;
+          svg path {
+            fill: $orange;
+          }
+        }
+      }
 
       &-minus {
         svg {

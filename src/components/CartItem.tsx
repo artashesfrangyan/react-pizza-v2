@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
 import { CartItemProps } from '../types/CartItemProps';
+import clsx from 'clsx';
 
 const CartItem: React.FC<CartItemProps> = (values) => {
   const dispatch = useDispatch();
@@ -35,13 +36,12 @@ const CartItem: React.FC<CartItemProps> = (values) => {
         </div>
       </Link>
       <div className="cart__item-count">
-        <div
-          onClick={() => {
-            values.count && values.count > 1
-              ? onClickMinus(values.id)
-              : dispatch(removeItem(values.id));
-          }}
-          className="button button--outline button--circle cart__item-count-minus">
+        <button
+          className={clsx('button button--outline button--circle cart__item-count-minus', {
+            'cart__item-count--disabled': values.count === 1,
+          })}
+          disabled={values.count === 1}
+          onClick={() => onClickMinus(values.id)}>
           <svg
             width="10"
             height="10"
@@ -55,7 +55,7 @@ const CartItem: React.FC<CartItemProps> = (values) => {
               d="M5.75998 5.92001L3.83998 5.92001L0.959977 5.92001C0.429817 5.92001 -2.29533e-05 5.49017 -2.29301e-05 4.96001C-2.2907e-05 4.42985 0.429817 4.00001 0.959977 4.00001L3.83998 4L5.75998 4.00001L8.63998 4.00001C9.17014 4.00001 9.59998 4.42985 9.59998 4.96001C9.59998 5.49017 9.17014 5.92001 8.63998 5.92001L5.75998 5.92001Z"
               fill="#EB5A1E"></path>
           </svg>
-        </div>
+        </button>
         <b>{values.count}</b>
         <div
           onClick={() => onClickPlus(values.id)}
