@@ -5,9 +5,9 @@ type CategoriesProps = {
   handleCategory: (i: number) => void;
 };
 
-const Categories: React.FC<CategoriesProps> = ({ value, handleCategory }) => {
-  const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Микс'];
+const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Микс'];
 
+const Categories: React.FC<CategoriesProps> = ({ value, handleCategory }) => {
   return (
     <div className="categories">
       <ul>

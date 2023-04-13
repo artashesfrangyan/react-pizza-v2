@@ -27,6 +27,8 @@ const Home = () => {
   const { sortOption, categoryId, currentPage, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
 
+  const onChangeCategory = React.useCallback((id: number) => dispatch(setCategoryId(id)), []);
+
   const getPizzas = async () => {
     let url = new URL('https://64283422161067a83b092b04.mockapi.io/items?limit=4');
     categoryId && url.searchParams.append('category', categoryId.toString());
@@ -76,7 +78,7 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} handleCategory={(id) => dispatch(setCategoryId(id))} />
+        <Categories value={categoryId} handleCategory={onChangeCategory} />
         <Sort
           value={sortOption}
           handleSort={(option) => {
