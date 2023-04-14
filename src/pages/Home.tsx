@@ -12,7 +12,7 @@ import {
   setCategoryId,
   setSortOption,
   setCurrentPage,
-  setFilters,
+  setFilters, 
   selectFilter,
 } from '../redux/slices/filterSlice';
 import { fetchItems, selectPizzaData } from '../redux/slices/pizzaSlice';
@@ -81,9 +81,6 @@ const Home = () => {
         <Categories value={categoryId} handleCategory={onChangeCategory} />
         <Sort
           value={sortOption}
-          handleSort={(option) => {
-            dispatch(setSortOption(option));
-          }}
         />
       </div>
 

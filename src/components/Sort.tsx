@@ -1,5 +1,7 @@
 import React from 'react';
 import { SortProps } from '../types/SortProps';
+import { useDispatch } from 'react-redux';
+import { setSortOption } from '../redux/slices/filterSlice';
 
 export const options = [
   { name: 'популярности', parameter: 'rating' },
@@ -9,11 +11,11 @@ export const options = [
 
 type MouseProps = { composedPath: () => { includes: (arg: HTMLElement) => boolean } };
 
-const Sort: React.FC<{ value: SortProps; handleSort: (value: SortProps) => void }> = ({
-  value,
-  handleSort,
+const Sort: React.FC<{ value: SortProps}> = React.memo(({
+  value
 }) => {
-  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false); 
   const sortRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -28,6 +30,10 @@ const Sort: React.FC<{ value: SortProps; handleSort: (value: SortProps) => void 
       document.body.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
+  const handleSort = (value:{name: string, parameter: string}) => {
+    dispatch(setSortOption(value))
+  }
 
   return (
     <div ref={sortRef} className="sort">
@@ -65,6 +71,6 @@ const Sort: React.FC<{ value: SortProps; handleSort: (value: SortProps) => void 
       )}
     </div>
   );
-};
+});
 
 export default Sort;
