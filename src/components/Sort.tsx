@@ -1,4 +1,7 @@
 import React from 'react';
+import { SortProps } from '../types/SortProps';
+import { useDispatch } from 'react-redux';
+import { setSortOption } from '../redux/slices/filterSlice';
 
 export const options = [
   { name: 'популярности', parameter: 'rating' },
@@ -6,22 +9,31 @@ export const options = [
   { name: 'алфавиту', parameter: 'title' },
 ];
 
-const Sort = ({ value, handleSort }) => {
-  const [open, setOpen] = React.useState(false);
-  const sortRef = React.useRef();
+type MouseProps = { composedPath: () => { includes: (arg: HTMLElement) => boolean } };
+
+const Sort: React.FC<{ value: SortProps}> = React.memo(({
+  value
+}) => {
+  const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false); 
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    function handleClickOutside(event) {
-      if (!event.composedPath().includes(sortRef.current)) {
+    function handleClickOutside(event: MouseProps) {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setOpen(false);
       }
     }
     document.body.addEventListener('click', handleClickOutside);
 
-    return () =>  {
+    return () => {
       document.body.removeEventListener('click', handleClickOutside);
-    }
+    };
   }, []);
+
+  const handleSort = (value:{name: string, parameter: string}) => {
+    dispatch(setSortOption(value))
+  }
 
   return (
     <div ref={sortRef} className="sort">
@@ -59,6 +71,6 @@ const Sort = ({ value, handleSort }) => {
       )}
     </div>
   );
-};
+});
 
 export default Sort;
