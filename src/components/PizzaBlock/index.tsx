@@ -10,7 +10,7 @@ const PizzaBlock: React.FC<ItemProps> = ({ id, title, price, imageUrl, sizes, ty
   const thicknesses = ['тонкое', 'традиционное'];
   const addedCount = cartItem ? cartItem.count : 0;
 
-  const [activeThickness, setActiveThickness] = React.useState<number>(0);
+  const [activeThickness, setActiveThickness] = React.useState<number>(types[0]);
   const [activeSize, setActiveSize] = React.useState<number>(0);
 
   const onClickAdd = () => {

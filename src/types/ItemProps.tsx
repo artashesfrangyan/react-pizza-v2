@@ -3,6 +3,6 @@ export interface ItemProps {
   title: string;
   price: number;
   imageUrl: string;
-  types: [];
+  types: number[];
   sizes: [];
 }
