@@ -12,7 +12,7 @@ import MainLayout from './layouts/MainLayout';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/react-pizza-v2/" element={<MainLayout />}>
         <Route path="" element={<Home />}></Route>
         <Route path="*" element={<NotFound />}></Route>
         <Route path="pizza/:id" element={<FullPizza />}></Route>
