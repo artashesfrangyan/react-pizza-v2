@@ -1,12 +1,16 @@
 .root {
   position: relative;
-  left: -120px;
+}
+
+@media (min-width: 1280px) {
+  .input {
+    width: 400px;
+  }
 }
 
 .input {
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 12px 45px;
-  width: 400px;
   border-radius: 12px;
   font-size: 16px;
   transition: all 0.15s ease-in-out;
