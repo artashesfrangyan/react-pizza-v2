@@ -10,9 +10,8 @@ import Sort, { options } from '../components/Sort';
 import Pagination from '../components/Pagination';
 import {
   setCategoryId,
-  setSortOption,
   setCurrentPage,
-  setFilters, 
+  setFilters,
   selectFilter,
 } from '../redux/slices/filterSlice';
 import { fetchItems, selectPizzaData } from '../redux/slices/pizzaSlice';
@@ -20,7 +19,7 @@ import { useAppDispatch } from '../redux/store';
 
 const Home = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const dispatch: any = useAppDispatch();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
@@ -79,9 +78,7 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} handleCategory={onChangeCategory} />
-        <Sort
-          value={sortOption}
-        />
+        <Sort value={sortOption} />
       </div>
 
       {status === 'error' ? (

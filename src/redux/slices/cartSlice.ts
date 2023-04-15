@@ -62,10 +62,10 @@ export const cartSlice = createSlice({
   },
 });
 
-export const selectCart = (state: RootState) => state.cart;
+export const selectCart = (state: RootState) => state.persistedReducer.cart;
 
 export const selectCartItemById = (id: string) => (state: RootState) =>
-  state.cart.items.find((obj: { id: string }) => obj.id === id);
+  state.persistedReducer.cart.items.find((obj: { id: string }) => obj.id === id);
 
 export const { addItem, removeItem, clearItems, minusItem } = cartSlice.actions;
 

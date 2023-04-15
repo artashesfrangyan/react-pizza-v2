@@ -1,12 +1,34 @@
-import { configureStore } from '@reduxjs/toolkit';
-import cart from './slices/cartSlice';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import filters from './slices/filterSlice';
 import pizza from './slices/pizzaSlice';
 import { useDispatch } from 'react-redux';
+import cartReducer from './slices/cartSlice';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
+import thunk from 'redux-thunk';
 
-export const store = configureStore({
-  reducer: { filters, cart, pizza },
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const rootReducer = combineReducers({
+  cart: cartReducer,
+  filters: filters,
+  pizza: pizza,
 });
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+  reducer: { persistedReducer, filters, pizza },
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: [thunk],
+});
+
+export const persistor = persistStore(store);
+
+export default store;
 
 export type RootState = ReturnType<typeof store.getState>;
 
