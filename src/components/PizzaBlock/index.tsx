@@ -4,7 +4,7 @@ import { addItem, selectCartItemById } from '../../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
 import { ItemProps } from '../../types/ItemProps';
 
-const PizzaBlock: React.FC<ItemProps> = ({ id, title, price, imageUrl, sizes, types }) => {
+export const PizzaBlock: React.FC<ItemProps> = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const thicknesses = ['тонкое', 'традиционное'];
@@ -74,5 +74,3 @@ const PizzaBlock: React.FC<ItemProps> = ({ id, title, price, imageUrl, sizes, ty
     </div>
   );
 };
-
-export default PizzaBlock;

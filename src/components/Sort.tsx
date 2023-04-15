@@ -11,11 +11,9 @@ export const options = [
 
 type MouseProps = { composedPath: () => { includes: (arg: HTMLElement) => boolean } };
 
-const Sort: React.FC<{ value: SortProps}> = React.memo(({
-  value
-}) => {
+export const Sort: React.FC<{ value: SortProps }> = React.memo(({ value }) => {
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false); 
+  const [open, setOpen] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -31,9 +29,9 @@ const Sort: React.FC<{ value: SortProps}> = React.memo(({
     };
   }, []);
 
-  const handleSort = (value:{name: string, parameter: string}) => {
-    dispatch(setSortOption(value))
-  }
+  const handleSort = (value: { name: string; parameter: string }) => {
+    dispatch(setSortOption(value));
+  };
 
   return (
     <div ref={sortRef} className="sort">
@@ -72,5 +70,3 @@ const Sort: React.FC<{ value: SortProps}> = React.memo(({
     </div>
   );
 });
-
-export default Sort;
