@@ -1,7 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '../store';
-import { CartItemProps } from '../../types/CartItemProps';
 import { ItemProps } from '../../types/ItemProps';
 
 export const fetchItems = createAsyncThunk<ItemProps[], string>(
@@ -19,7 +18,7 @@ enum Status {
 }
 
 interface PizzaSliceState {
-  items: CartItemProps[];
+  items: ItemProps[];
   status: Status;
 }
 

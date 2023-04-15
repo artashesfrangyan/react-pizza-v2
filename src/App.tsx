@@ -1,13 +1,20 @@
 import React from 'react';
-
-import Home from './pages/Home';
+import Loadable from 'react-loadable';
 import { Routes, Route } from 'react-router-dom';
-import NotFound from './pages/NotFound';
-import Cart from './pages/Cart';
+import Home from './pages/Home';
 
 import './scss/app.scss';
-import FullPizza from './pages/FullPizza';
 import MainLayout from './layouts/MainLayout';
+import NotFound from './pages/NotFound';
+
+const Cart = Loadable({
+  loader: () => import(/* webpackChunkName: "Cart" */ './pages/Cart'),
+  loading: () => <div>Корзина загружается...</div>,
+});
+const FullPizza = Loadable({
+  loader: () => import(/* webpackChunkName: "FullPizza" */ './pages/FullPizza'),
+  loading: () => <div>Пицца загружается...</div>,
+});
 
 function App() {
   return (

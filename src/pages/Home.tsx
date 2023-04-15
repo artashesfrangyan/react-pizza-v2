@@ -3,11 +3,8 @@ import { useSelector } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
-import Categories from '../components/Categories';
-import PizzaBlock from '../components/PizzaBlock';
-import Skeleton from '../components/PizzaBlock/Skeleton';
-import Sort, { options } from '../components/Sort';
-import Pagination from '../components/Pagination';
+import { Categories, PizzaBlock, Skeleton, Sort, options, Pagination } from '../components';
+
 import {
   setCategoryId,
   setCurrentPage,
@@ -16,6 +13,7 @@ import {
 } from '../redux/slices/filterSlice';
 import { fetchItems, selectPizzaData } from '../redux/slices/pizzaSlice';
 import { useAppDispatch } from '../redux/store';
+import { ItemProps } from '../types/ItemProps';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -92,7 +90,7 @@ const Home = () => {
           <div className="content__items">
             {status === 'loading'
               ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
-              : items.map((item) => <PizzaBlock types={[]} sizes={[]} key={item.id} {...item} />)}
+              : items.map((item: ItemProps) => <PizzaBlock key={item.id} {...item} />)}
           </div>
           <div id="container">
             <Pagination setCurrentPage={(id: number) => dispatch(setCurrentPage(id))} />
