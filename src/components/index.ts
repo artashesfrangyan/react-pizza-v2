@@ -1,7 +1,5 @@
-import Categories from '../components/Categories';
-import PizzaBlock from '../components/PizzaBlock';
-import Skeleton from '../components/PizzaBlock/Skeleton';
-import Sort, { options } from '../components/Sort';
-import Pagination from '../components/Pagination';
-
-export { Categories, PizzaBlock, Skeleton, Sort, options, Pagination };
+export { default as Categories } from '../components/Categories';
+export { default as PizzaBlock } from '../components/PizzaBlock';
+export { default as Skeleton } from '../components/PizzaBlock/Skeleton';
+export { default as Sort, options } from '../components/Sort';
+export { default as Pagination } from '../components/Pagination';
