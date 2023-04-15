@@ -3,16 +3,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addItem, selectCartItemById } from '../redux/slices/cartSlice';
+import { ItemProps } from '../types/ItemProps';
 
 const FullPizza: React.FC = () => {
   const { id }: any = useParams();
-  const [item, setItem] = React.useState<{
-    imageUrl: string;
-    title: string;
-    price: number;
-    sizes: number[];
-    types: number[];
-  }>();
+  const [item, setItem] = React.useState<ItemProps>();
   const dispatch = useDispatch();
   const cartItem: any = useSelector(selectCartItemById(id));
   const thicknesses = ['тонкое', 'традиционное'];
@@ -39,9 +34,10 @@ const FullPizza: React.FC = () => {
       try {
         const { data } = await axios.get(`https://64283422161067a83b092b04.mockapi.io/items/${id}`);
         setItem(data);
+        setActiveThickness(data.types[0]);
       } catch (error) {
         alert('Ошибка при получении пиццы. Возвращаем вас на главную страницу');
-        navigate('/');
+        navigate('/react-pizza-v2/');
       }
     }
 

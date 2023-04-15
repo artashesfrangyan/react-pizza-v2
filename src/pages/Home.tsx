@@ -17,6 +17,7 @@ import {
 } from '../redux/slices/filterSlice';
 import { fetchItems, selectPizzaData } from '../redux/slices/pizzaSlice';
 import { useAppDispatch } from '../redux/store';
+import { ItemProps } from '../types/ItemProps';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -93,7 +94,7 @@ const Home = () => {
           <div className="content__items">
             {status === 'loading'
               ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
-              : items.map((item) => <PizzaBlock types={[]} sizes={[]} key={item.id} {...item} />)}
+              : items.map((item: ItemProps) => <PizzaBlock key={item.id} {...item} />)}
           </div>
           <div id="container">
             <Pagination setCurrentPage={(id: number) => dispatch(setCurrentPage(id))} />
